@@ -9,9 +9,110 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const team = [];
+const teamId = [];
 
+// main function that will be called to start app
+function initApp() {
+  function addManager() {
+    console.log("Build your team!");
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "managername",
+          message: "What is the manager's name?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            } else {
+              return "Please enter a valid name.";
+            }
+          },
+        },
+        {
+          type: "input",
+          name: "managerid",
+          message: "What is the manager's id?",
+          validate: (answer) => {
+            const validInput = answer.match(/^[1-9]\d*$/);
+            if (validInput) {
+              return true;
+            } else {
+              return "Please enter a valid id.";
+            }
+          },
+        },
+      ])
+      .then((answers) => {
+        const manager = new Manager(
+          answers.managername,
+          answers.managerid,
+          answers.manageremail,
+          answers.managerofficenumber
+        );
+        team.push(manager);
+        teamId.push(answers.managerid);
+        buildTeam();
+      });
+  }
+  function buildTeam() {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "employeechoice",
+          message: "Which type of employee would you like to add?",
+          choices: ["Engineer", "Intern", "Stop adding employees"],
+        },
+      ])
+      .then((answer) => {
+        switch (answer.employeechoice) {
+          case "Engineer":
+            addEngineer();
+            break;
+          case "Intern":
+            addIntern();
+            break;
+          default:
+            writeTeam();
+        }
+      });
+  }
+  function addEngineer() {
+    inquirer.prompt([
+      {
+        type: "input",
+        name: "engineerid",
+        message: "What is the engineer's id?",
+        validate: (answer) => {
+          const validInput = answer.match(/^[1-9]\d*$/);
+          if (validInput) {
+            if (teamId.includes(answer)) {
+              return "This id is already taken.";
+            } else {
+              return true;
+            }
+          } else {
+            return "Please enter a valid id.";
+          }
+        },
+      },
+    ]);
+  }
+
+  function writeTeam() {
+    fs.writeFileSync(outputPath, render);
+  }
+
+  addManager();
+}
+
+// calling the main function
+initApp();
 
 // Write code to use inquirer to gather information about the development team members,
+
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 // After the user has input all employees desired, call the `render` function (required
@@ -33,3 +134,6 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+// consider using an array of ids to see if an id has been added before - add this to validation
+//

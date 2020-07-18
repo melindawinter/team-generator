@@ -207,7 +207,7 @@ function initApp() {
             }
           },
         },
-        // Engineer's id
+        // Intern's id
         {
           type: "input",
           name: "internid",
@@ -268,8 +268,9 @@ function initApp() {
       });
   }
   // Writes the info from the inquirer prompts to an html file
+  const htmlResults = render(team);
   function writeTeam() {
-    fs.writeFileSync(outputPath, render);
+    fs.writeFileSync(outputPath, htmlResults);
   }
 
   addManager();

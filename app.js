@@ -43,6 +43,34 @@ function initApp() {
             }
           },
         },
+        {
+          type: "input",
+          name: "manageremail",
+          message: "What is the manager's email?",
+          validate: (answer) => {
+            const validInput = answer.match(
+              /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+            );
+            if (validInput) {
+              return true;
+            } else {
+              return "Please enter a valid email.";
+            }
+          },
+        },
+        {
+          type: "input",
+          name: "manageroffice",
+          message: "What is the manager's office number?",
+          validate: (answer) => {
+            const validInput = answer.match(/^[1-9]\d*$/);
+            if (validInput) {
+              return true;
+            } else {
+              return "Please enter a valid office number.";
+            }
+          },
+        },
       ])
       .then((answers) => {
         const manager = new Manager(

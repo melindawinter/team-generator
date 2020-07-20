@@ -18,7 +18,7 @@ This is a cli app that will allow an employer to easily create a webpage with a 
 
 ## Installation
 
-If you would like to use this generator, please clone my project. Make sure you have node.js installed on your computer. You can find the download here https://nodejs.org/en/download/.
+If you would like to use this generator, please clone my project. Make sure you have node.js installed on your computer. You can find the download here <https://nodejs.org/en/download/>.
 
 ## Usage
 

@@ -1,0 +1,16 @@
+.jumbotron {
+  background-color: deeppink;
+  color: white;
+}
+
+.card-header {
+  background-color: deeppink;
+}
+
+.card-title {
+  color: white;
+}
+
+.card {
+  border-color: deeppink;
+}

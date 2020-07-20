@@ -25,6 +25,10 @@ Once you have a cloned version, open it up in VS Code or another editor. Open up
 
 A formatted webpage will be generated.
 
+![HTML](images/html-1.png)
+
+![Responsive HTML](images/html-responsive.png)
+
 ## License
 
 GNU General Public License v3.0
@@ -43,4 +47,4 @@ To run the tests for the project, type npm run test into the command line.
 
 - [Github Profile](https://github.com/melindawinter)
 - melindawinter42@gmail.com
-- You can easily reach me by email or you can find me on LinkedIn here http://www.linkedin.com/in/melinda-winter-34a25689.
+- You can easily reach me by email or you can find me on LinkedIn here <http://www.linkedin.com/in/melinda-winter-34a25689>.

@@ -14,3 +14,7 @@
 .card {
   border-color: deeppink;
 }
+
+.col {
+  flex-grow: 0;
+}

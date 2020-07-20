@@ -4,13 +4,16 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-
+const util = require("util");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+
 const team = [];
 const idArray = [];
+
+const writeFileAsync = util.promisify(fs.writeFile);
 
 // main function that will be called to start app
 function initApp() {
@@ -22,7 +25,7 @@ function initApp() {
         // Manager's name
         {
           type: "input",
-          name: "managername",
+          name: "name",
           message: "What is the manager's name?",
           validate: (answer) => {
             if (answer !== "") {
@@ -35,7 +38,7 @@ function initApp() {
         // Manager's id
         {
           type: "input",
-          name: "managerid",
+          name: "id",
           message: "What is the manager's id?",
           validate: (answer) => {
             const validInput = answer.match(/^[1-9]\d*$/);
@@ -49,7 +52,7 @@ function initApp() {
         // Manager's email
         {
           type: "input",
-          name: "manageremail",
+          name: "email",
           message: "What is the manager's email?",
           validate: (answer) => {
             const validInput = answer.match(
@@ -65,7 +68,7 @@ function initApp() {
         // Manager's office number
         {
           type: "input",
-          name: "manageroffice",
+          name: "office",
           message: "What is the manager's office number?",
           validate: (answer) => {
             const validInput = answer.match(/^[1-9]\d*$/);
@@ -79,13 +82,13 @@ function initApp() {
       ])
       .then((answers) => {
         const manager = new Manager(
-          answers.managername,
-          answers.managerid,
-          answers.manageremail,
-          answers.managerofficenumber
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.office
         );
         team.push(manager);
-        idArray.push(answers.managerid);
+        idArray.push(answers.id);
         buildTeam();
       });
   }
@@ -120,7 +123,7 @@ function initApp() {
         // Engineer's name
         {
           type: "input",
-          name: "engineername",
+          name: "name",
           message: "What is the engineer's name?",
           validate: (answer) => {
             if (answer !== "") {
@@ -133,7 +136,7 @@ function initApp() {
         // Engineer's id
         {
           type: "input",
-          name: "engineerid",
+          name: "id",
           message: "What is the engineer's id?",
           validate: (answer) => {
             const validInput = answer.match(/^[1-9]\d*$/);
@@ -151,7 +154,7 @@ function initApp() {
         // Engineer's email
         {
           type: "input",
-          name: "engineeremail",
+          name: "email",
           message: "What is the engineer's email?",
           validate: (answer) => {
             const validInput = answer.match(
@@ -167,7 +170,7 @@ function initApp() {
         // Engineer's GitHub
         {
           type: "input",
-          name: "engineergithub",
+          name: "github",
           message: "What is the engineer's GitHub username?",
           validate: (answer) => {
             if (answer !== "") {
@@ -180,13 +183,13 @@ function initApp() {
       ])
       .then((answers) => {
         const engineer = new Engineer(
-          answers.engineername,
-          answers.engineerid,
-          answers.engineeremail,
-          answers.engineergithub
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.github
         );
         team.push(engineer);
-        idArray.push(answers.engineerid);
+        idArray.push(answers.id);
         buildTeam();
       });
   }
@@ -197,7 +200,7 @@ function initApp() {
         // Intern's name
         {
           type: "input",
-          name: "internname",
+          name: "name",
           message: "What is the intern's name?",
           validate: (answer) => {
             if (answer !== "") {
@@ -210,7 +213,7 @@ function initApp() {
         // Intern's id
         {
           type: "input",
-          name: "internid",
+          name: "id",
           message: "What is the intern's id?",
           validate: (answer) => {
             const validInput = answer.match(/^[1-9]\d*$/);
@@ -225,10 +228,10 @@ function initApp() {
             }
           },
         },
-        // intern's email
+        // Intern's email
         {
           type: "input",
-          name: "internemail",
+          name: "email",
           message: "What is the intern's email?",
           validate: (answer) => {
             const validInput = answer.match(
@@ -244,7 +247,7 @@ function initApp() {
         // Intern's school
         {
           type: "input",
-          name: "internschool",
+          name: "school",
           message: "Where does the intern go to school?",
           validate: (answer) => {
             if (answer !== "") {
@@ -257,20 +260,20 @@ function initApp() {
       ])
       .then((answers) => {
         const intern = new Intern(
-          answers.internname,
-          answers.internid,
-          answers.internemail,
-          answers.internschool
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.school
         );
         team.push(intern);
-        idArray.push(answers.internid);
+        idArray.push(answers.id);
         buildTeam();
       });
   }
-  // Writes the info from the inquirer prompts to an html file
-  const htmlResults = render(team);
+
   function writeTeam() {
-    fs.writeFileSync(outputPath, htmlResults);
+    const htmlResults = render(team);
+    writeFileAsync(outputPath, htmlResults);
   }
 
   addManager();
@@ -279,24 +282,4 @@ function initApp() {
 // Calling the main function
 initApp();
 
-// and to create objects for each team member (using the correct classes as blueprints!)
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
+// Writes the info from the inquirer prompts to an html file

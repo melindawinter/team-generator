@@ -2,7 +2,9 @@
 
 ## Description
 
-This is a cli app that will allow an employer to easily create a webpage with a team's contact information. It is currently set up for teams with one manager and a variety of engineers and interns but could be easily adapted for other teams.
+This is a cli app that will allow an employer to easily create a webpage with a team's contact information. It is currently set up for teams with one manager and a variety of engineers and interns but could be easily adapted for other teams. Please click the link below for a demonstration.
+
+<https://drive.google.com/file/d/1cslRX4UwW5UMBMN3jik6dIJLvf5ED3MR/view?usp=sharing>
 
 ## Table of Contents
 
@@ -12,6 +14,7 @@ This is a cli app that will allow an employer to easily create a webpage with a 
 - [Contributing](#contributing)
 - [Tests](#tests)
 - [Questions](#questions)
+- [Credits](#credits)
 
 ## Installation
 
@@ -48,3 +51,7 @@ To run the tests for the project, type npm run test into the command line.
 - [Github Profile](https://github.com/melindawinter)
 - melindawinter42@gmail.com
 - You can easily reach me by email or you can find me on LinkedIn here <http://www.linkedin.com/in/melinda-winter-34a25689>.
+
+## Credits
+
+A big thank you to my team members Cyrus Jose and Kate An for helping me to get this working! Thank you to Adam Abundis for all the resources and the extra class tutoring session. Thanks to Thor Nolan, my very awesome tutor who helped me get started on this project.

@@ -10,6 +10,7 @@ This is a cli app that will allow an employer to easily create a webpage with a 
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Technologies](#technologies)
 - [License](#license)
 - [Contributing](#contributing)
 - [Tests](#tests)
@@ -31,6 +32,10 @@ A formatted webpage will be generated.
 ![HTML](images/html-1.png)
 
 ![Responsive HTML](images/html-responsive.png)
+
+## Technologies
+
+Node, Inquirer, Jest, HTML
 
 ## License
 

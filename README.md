@@ -35,7 +35,7 @@ A formatted webpage will be generated.
 
 ## Technologies
 
-Node, Inquirer, Jest, HTML
+Node, Inquirer, Jest, HTML, JavaScript
 
 ## License
 
